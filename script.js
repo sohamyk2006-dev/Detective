@@ -46,6 +46,7 @@ function handleDigit(digit) {
 }
 
 function handleSubmit() {
+  
   if (entered.length < 4) {
     showError("Enter all 4 digits");
     return;
@@ -67,23 +68,24 @@ function handleSubmit() {
   // Wrong PIN → count the guess
   attempts++;
 
-  if (attempts >= MAX_ATTEMPTS) {
-    showError("You've used all 5 guesses!");
+localStorage.setItem("pinAttempts", attempts);
 
-    // Disable all keypad buttons
-    keys.forEach(key => {
-      key.style.pointerEvents = "none";
-      key.style.opacity = "0.5";
-    });
+if (attempts >= MAX_ATTEMPTS) {
+  showError("You've used all 5 guesses!");
 
-    return;
-  }
+  keys.forEach(key => {
+    key.style.pointerEvents = "none";
+    key.style.opacity = "0.5";
+  });
 
-  const remaining = MAX_ATTEMPTS - attempts;
+  return;
+}
 
-  showError(
-    `Wrong code — ${remaining} guess${remaining === 1 ? "" : "es"} remaining`
-  );
+const remaining = MAX_ATTEMPTS - attempts;
+
+showError(
+  `Wrong code — ${remaining} guess${remaining === 1 ? "" : "es"} remaining`
+);
 }
 
 // Keypad clicks

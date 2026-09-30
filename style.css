@@ -1,0 +1,137 @@
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
+}
+
+/* ─── Screens ─── */
+.screen {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.screen.active { display: flex; }
+
+.container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* ─── Title ─── */
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: 1px;
+}
+.subtitle {
+  color: #aaa;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+/* ─── PIN Dots ─── */
+.pin-display {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 1.5rem;
+}
+.dot {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  transition: background 0.15s, border-color 0.15s;
+}
+.dot.filled {
+  background: #7c5cfc;
+  border-color: #7c5cfc;
+}
+
+/* ─── Error ─── */
+.error-msg {
+  color: #ff5e5e;
+  min-height: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ─── Keypad ─── */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.key {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 16px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  user-select: none;
+}
+.key:hover  { background: rgba(255,255,255,0.15); }
+.key:active { transform: scale(0.93); }
+
+.clear-key  { color: #ff5e5e; }
+.submit-key { background: #7c5cfc; border-color: #7c5cfc; }
+.submit-key:hover { background: #6a48e6; }
+
+/* ─── Success Screen ─── */
+.success-container {
+  max-width: 600px;
+  animation: fadeUp 0.5s ease-out;
+}
+.success-title {
+  font-size: 2.4rem;
+  margin-bottom: 1.5rem;
+}
+.success-text {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #d0d0d0;
+  margin-bottom: 2rem;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 0.65rem 1.6rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.back-btn:hover { background: rgba(255,255,255,0.15); }
+
+/* ─── Shake animation on wrong code ─── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-6px); }
+  80%      { transform: translateX(6px); }
+}
+.shake { animation: shake 0.4s ease; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -17,7 +17,8 @@ const successScreen = document.getElementById('success-screen');
 const backBtn   = document.getElementById('back-btn');
 
 let entered = "";
-
+let attempts = 0;
+const MAX_ATTEMPTS = 5;
 function updateDots() {
   dots.forEach((dot, i) => {
     dot.classList.toggle('filled', i < entered.length);
@@ -49,17 +50,40 @@ function handleSubmit() {
     showError("Enter all 4 digits");
     return;
   }
+
   if (CORRECT_PIN === "") {
     showError("PIN not set yet!");
     return;
   }
+
+  // Correct PIN → go to final question
   if (entered === CORRECT_PIN) {
     switchScreen(pinScreen, successScreen);
     entered = "";
     updateDots();
-  } else {
-    showError("Wrong code — try again");
+    return;
   }
+
+  // Wrong PIN → count the guess
+  attempts++;
+
+  if (attempts >= MAX_ATTEMPTS) {
+    showError("You've used all 5 guesses!");
+
+    // Disable all keypad buttons
+    keys.forEach(key => {
+      key.style.pointerEvents = "none";
+      key.style.opacity = "0.5";
+    });
+
+    return;
+  }
+
+  const remaining = MAX_ATTEMPTS - attempts;
+
+  showError(
+    `Wrong code — ${remaining} guess${remaining === 1 ? "" : "es"} remaining`
+  );
 }
 
 // Keypad clicks

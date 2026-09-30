@@ -2,7 +2,7 @@
 //  CONFIGURATION — fill these in later
 // ============================================================
 
-const CORRECT_PIN = "";        // ← e.g. "1234"
+const CORRECT_PIN = "4723";        // ← e.g. "1234"
 // The success text is in index.html inside #success-text
 
 // ============================================================
